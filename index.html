@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Übersicht über die Positionskarten-Vorlagen in der deutschen Wikipedia</title>
+  <!-- jQuery für Ajax-Kram und Event-Handling -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- Leaflet für die Karte -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+  <!-- eigener Kram -->  
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js"></script>
+</head>
+<body>
+  <h1>Übersicht über die Positionskarten in der deutschen Wikipedia</h1>
+  <!--<button onclick="getAllPages()">Get all pages</button>
+  <button onclick="document.getElementById('output').value = JSON.stringify(allpages)">Output allpages</button>
+  <button onclick="addToMap()">Map them</button>
+  <textarea id="output"></textarea>-->
+  <h2>Einstellungen für die Kartenansicht</h2>
+  <p>
+    <input type="checkbox" id="onlyShowCompleteRects" checked><label for="onlyShowCompleteRects">Zeige nur vollständig im Kartenausschnitt sichtbare Rechtecke</label>
+  </p>
+  <p>
+    <input type="checkbox" id="hideRectsSmallerThan" /><label for="hideRectsSmallerThan">Blende Rechtecke kleiner als X Pixel aus</label>
+    <label for="hideRectsThreshold">X = </label><input type="range" min="10" max="10000" value="1000" id="hideRectsThreshold" />
+  </p>
+
+  <h2>Karte</h2>
+  <p>Wenn man auf den Rahmen klickt, öffnet sich ein Popup mit dem Namen der Vorlage und einem Link zu ihrer Wiki-Seite</p>
+  <div id="map" style="height:500px"></div>
+
+  <h2>Vorlagen, die aus technischen Gründen nicht dargestellt werden konnten</h2>
+  <p>Bei diesen <span id="failscount">circa 100</span> Vorlagen sind die Ausmaße-Daten nicht im Format "top=A ... bottom=B ... left=C ... right=D" angegeben. Das kann verschiedene Gründe haben:</p>
+  <ul>
+    <li>Die Angaben in einer anderen Reihenfolge, z.B. left, right, top, bottom</li>
+    <li>Es handelt sich um Projektionen, die diese Parameter gar nicht brauchen (z.B. die Längentreue Kegelprojektion)</li>
+    <li>Es handelt sich nicht um Positionskarten im eigentlischen Sinn (Technische Hilfsvorlagen wie Positionskarte+, fertige Positionskarten wie die Positionskarte Landtagsprojekte etc.)</li>
+  </ul>
+  <p>Durch Klick auf den Namen der Vorlage öffnet sich eine Vorschau ihres Quelltextes, sodass man ggf. aus diesem selbst entnehmen kann, welche Ausmaße die Karte in etwa hat.</p>
+  <hr />
+  <div id="fails"></div>
+</body>
+</html>
